@@ -1,0 +1,86 @@
+---
+title: "Statrozphere Volume I"
+author: "Kadek Adit Wiryadana"
+date: "2/10/2021"
+output: html_document
+---
+
+```{r  include = FALSE}
+library(tidyverse)
+
+current_date <- Sys.Date()
+```
+# Statrozphere
+### A daily plot for **#rstater** in Instagram & Twitter
+
+We will explore the possibility of R native graphic engine, ggplot2, lattice, plotly, and our creativity. Our aim is to demonstrate that R, a free and open source software, could produce an attractive yet a reproducible plot. Not to mention this is a way to force me (author) to learn R, otherwise I will always procrastinate. I will do it in small steps at a time, at least one plot at a time (hopefully).
+
+We will use a biomedical data (primarily), as I am a medical doctor. Familiarity of the data arent neccesarry, but it helps a lot during early learning phase. First we will use the data obtained from [Kaggle](https://www.kaggle.com/uciml/pima-indians-diabetes-database?search=diabetes)
+
+## Volume I Issue 1   
+`r current_date` @ Puskesmas Tabanan III
+
+Our topics is a simple scatter plot and regression line. We will explore the relathionship of Blood Glucose Levels and BMI.
+```{r read_data}
+dm <- read.csv("diabetes.csv", na.strings = c("NA", "0")) #string NA and 0 are considered NA
+dm$Outcome <- ifelse(is.na(dm$Outcome), 0, 1)
+#glimpse(dm)
+pairs(dm)
+```
+
+```{r scatterplot1}
+dm$Glucose = jitter(dm$Glucose)
+dm$Insulin = jitter(dm$Insulin)
+
+alpha = 150 # Transparent points
+palette(c(rgb(200, 79, 178, alpha = alpha, maxColorValue = 255), rgb(105, 147, 45, alpha = alpha, maxColorValue = 255)))
+         
+
+#par(mar=c(3,3,2,1),
+    #mgp = c(2,0.4,0),
+    #las = 1,
+    #tck = -.01,
+    #xaxs = "i", yaxs = "i")              
+              
+plot(dm$Glucose, dm$Insulin, 
+     #bg=ifelse(dm$Outcome==0, "gray", "steelblue"), 
+     #bg=dm$Outcome,
+     bg=ifelse(dm$Outcome==0, rgb(200, 79, 178, alpha = alpha, maxColorValue = 255), rgb(105, 147, 45, alpha = alpha, maxColorValue = 255)),
+     pch=21, 
+     cex=0.9,
+     main ="Relathionship of Glucose & Insulin Levels",
+     #sub = "UCI Machine Learning Data - Pima Indian Diabetes Database",
+     ylab = "Insulin Levels",
+     xlab = "Glucose Levels",
+     ylim = c(0,1000),
+     xlim = c(50,200),
+     axes = FALSE,
+     frame.plot = FALSE)
+     #panel.first = abline (h=seq(2, 4.5, 0.5), col = "grey80"))
+
+legend(x=50, y= 900,
+       legend = c("0","1"), 
+       #col = dm$Outcome, 
+       col = c(rgb(200, 79, 178, alpha = alpha, maxColorValue = 255), rgb(105, 147, 45, alpha = alpha, maxColorValue = 255)),
+       pch=16)
+
+at = pretty(dm$Glucose)
+mtext(side = 1, text = at, at = at,
+      col = "grey20", line = 1, cex = 0.9)
+
+at = pretty(dm$Insulin)
+mtext(side = 2, text = at, at = at, col = "grey20", line = 1, cex = 0.9)
+
+text(165, 730, "Good Outcome", col = rgb(200, 79, 178, maxColorValue = 255))
+text(122,650, "Poor Outcome", col = rgb(105, 147, 45, maxColorValue = 255))
+
+
+#scatter1b <- plot(dm$BMI, dm$BloodPressure)
+#scatter1c <- plot(dm$BMI, dm$SkinThickness)
+```
+
+
+
+
+
+
