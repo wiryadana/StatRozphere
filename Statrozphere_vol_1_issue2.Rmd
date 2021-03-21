@@ -1,0 +1,42 @@
+---
+title: "Statrosphere Volume I_issue2"
+author: "Kadek Adit Wiryadana"
+date: "3/21/2021"
+output: html_document
+---
+
+ Here is the second issue of the first volume second of Statrosphere.
+ Now we will look at the Traumatic Brain Injury Dataset, posted by Devi Ramanan at [Data.World](https://data.world/deviramanan2016/traumatic-brain-injury) after their papers had posted at the [plosOne](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0169490#pone.0169490.s010).
+
+Today we will use base R package as the main power to analyse the data, library extension only used if deemed essential.
+
+### Load Library
+```{r}
+
+```
+
+### Import Data the Data
+```{r}
+data <- read.csv("Data Source/TBI/journal.pone.0169490.s010.csv")
+```
+
+### Take first glance
+```{r}
+class(data)
+str(data)
+head(data)
+summary(data)
+```
+### Reclasify the data types
+From previous data structure overview, we saw that almost all (except two) variables are integer. After we check the individual data and the documentation files, we know that many should be classified as factors. So, before going to the next step we are goind to fix this problem
+```{r}
+
+```
+
+
+### Exploratory Plot
+```{r}
+plot(data) # this is not a good way, obviously
+
+```
+
