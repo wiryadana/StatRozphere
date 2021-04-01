@@ -30,7 +30,7 @@ summary(data)
 ### Reclasify the data types
 From previous data structure overview, we saw that almost all (except two) variables are integer. After we check the individual data and the documentation files, we know that many should be classified as factors. So, before going to the next step we are goind to fix this problem
 ```{r}
-var <- c(2:17,21:26)
+var <- c(2:14,17,21:26)
 data[,var] <- lapply(data[,var], factor) #https://www.listendata.com/2015/05/converting-multiple-numeric-variables.html
 str(data)
 ```
@@ -40,6 +40,13 @@ str(data)
 ```{r}
 summary(data)
 plot(data) # this is not a good way, obviously
+```
+Exploring The Glasgow Outcome Scale Extended
+```{r}
+plot(data$GOSE_OverallScore3M, data$GOSE_OverallScore6M)
+
 plot(data$CT_INTRACRANIAL_FINAL, data$GOSE_OverallScore6M)
+
+t.test(data$GOSE_OverallScore3M ~ data$CT_INTRACRANIAL_FINAL, alternative = "two.sided")
 ```
 
