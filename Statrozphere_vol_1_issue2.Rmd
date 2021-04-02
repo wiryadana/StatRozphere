@@ -45,7 +45,17 @@ Exploring The Glasgow Outcome Scale Extended
 ```{r}
 plot(data$GOSE_OverallScore3M, data$GOSE_OverallScore6M)
 
-plot(data$CT_INTRACRANIAL_FINAL, data$GOSE_OverallScore6M)
+# Plot 
+plot1 <- plot(data$CT_INTRACRANIAL_FINAL, data$GOSE_OverallScore6M,
+     main = "GOSE Difference based on Pathological CT Finding",
+     #sub = "TRACK TBI Dataset",
+     xlab = "CT Cranial Finding", 
+     ylab = "Glasgow Outcome Scale Extended",
+     names = c("No finding", "Pathological Finding"),
+     frame.plot = FALSE
+)
+
+
 
 t.test(data$GOSE_OverallScore3M ~ data$CT_INTRACRANIAL_FINAL, alternative = "two.sided")
 ```
